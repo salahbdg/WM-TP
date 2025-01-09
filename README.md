@@ -24,6 +24,7 @@ nest new fr-administration
 
 nest g module users
 nest g controller users
+nest g service users
 
 curl http://localhost:3000/users 
 
