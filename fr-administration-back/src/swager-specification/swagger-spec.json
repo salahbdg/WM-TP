@@ -1,0 +1,1452 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "operationId": "UsersController_getAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "All the users."
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "post": {
+        "operationId": "UsersController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The user has been successfully created."
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "operationId": "UsersController_getOneUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user."
+          },
+          "404": {
+            "description": "User not found."
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "put": {
+        "operationId": "UsersController_updateOneUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The user has been successfully updated."
+          },
+          "404": {
+            "description": "User not found."
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      },
+      "delete": {
+        "operationId": "UsersController_deleteOneUser",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user has been successfully deleted."
+          },
+          "404": {
+            "description": "User not found"
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/users/{id}/roles": {
+      "get": {
+        "operationId": "UsersController_getRoles",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user."
+          },
+          "404": {
+            "description": "User not found."
+          }
+        },
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/roles": {
+      "post": {
+        "operationId": "RolesController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRoleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "RolesController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Role"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/roles/users/{name}": {
+      "get": {
+        "operationId": "RolesController_usersByRoleName",
+        "parameters": [
+          {
+            "name": "name",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/roles/{user}/{association}": {
+      "get": {
+        "operationId": "RolesController_findOne",
+        "parameters": [
+          {
+            "name": "user",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "association",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "RolesController_update",
+        "parameters": [
+          {
+            "name": "user",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "association",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRoleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RolesController_remove",
+        "parameters": [
+          {
+            "name": "user",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "association",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Role"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/associations": {
+      "get": {
+        "operationId": "AssociationsController_getAssociations",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "All the associations.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssociationDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "associations"
+        ]
+      },
+      "post": {
+        "operationId": "AssociationsController_createAssociation",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAssociation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The association has been created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssociationDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "associations"
+        ]
+      }
+    },
+    "/associations/{id}": {
+      "get": {
+        "operationId": "AssociationsController_getOneAssociation",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The association.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssociationDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Association not found."
+          }
+        },
+        "tags": [
+          "associations"
+        ]
+      },
+      "delete": {
+        "operationId": "AssociationsController_deleteAssociation",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The association has been deleted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Association"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Association not found."
+          }
+        },
+        "tags": [
+          "associations"
+        ]
+      },
+      "put": {
+        "operationId": "AssociationsController_updateAssociation",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAssociation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The association has been updated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssociationDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Association not found."
+          }
+        },
+        "tags": [
+          "associations"
+        ]
+      }
+    },
+    "/associations/{id}/members": {
+      "get": {
+        "operationId": "AssociationsController_getMembers",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The members of the association.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssociationMember"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Association not found."
+          }
+        },
+        "tags": [
+          "associations"
+        ]
+      }
+    },
+    "/associations/{id}/minutes": {
+      "get": {
+        "operationId": "AssociationsController_minutes",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "sort",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "content",
+                "date",
+                "association",
+                "voters"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "DESC",
+                "ASC",
+                "desc",
+                "asc"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The minutes of the association.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Minute"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Association not found."
+          }
+        },
+        "tags": [
+          "associations"
+        ]
+      }
+    },
+    "/associations/{id}/roles": {
+      "get": {
+        "operationId": "AssociationsController_roles",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The roles of the association.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Role"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Association not found."
+          }
+        },
+        "tags": [
+          "associations"
+        ]
+      }
+    },
+    "/minutes": {
+      "post": {
+        "operationId": "MinutesController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMinuteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Minute"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "MinutesController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Minute"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/minutes/{id}": {
+      "get": {
+        "operationId": "MinutesController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Minute"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "MinutesController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMinuteDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Minute"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MinutesController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Minute"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/events": {
+      "post": {
+        "operationId": "EventsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEventDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "EventsController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/{id}": {
+      "get": {
+        "operationId": "EventsController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "EventsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEventDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EventsController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "Gestion des Associations",
+    "description": "Descriptions des APIs de la gestion des associations",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "UpdateUser": {
+        "type": "object",
+        "properties": {
+          "lastname": {
+            "type": "string",
+            "description": "The last name of the user",
+            "example": "Doe"
+          },
+          "firstname": {
+            "type": "string",
+            "description": "The first name of the user",
+            "example": "John"
+          },
+          "age": {
+            "type": "number",
+            "description": "The age of the user",
+            "example": 42
+          },
+          "password": {
+            "type": "string",
+            "description": "The password of the user",
+            "example": "password"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the user",
+            "example": "user@mail.com"
+          }
+        }
+      },
+      "CreateUser": {
+        "type": "object",
+        "properties": {
+          "lastname": {
+            "type": "string",
+            "description": "The last name of the user",
+            "example": "Doe"
+          },
+          "firstname": {
+            "type": "string",
+            "description": "The first name of the user",
+            "example": "John"
+          },
+          "age": {
+            "type": "number",
+            "description": "The age of the user",
+            "example": 42,
+            "minimum": 0
+          },
+          "password": {
+            "type": "string",
+            "description": "The password of the user",
+            "example": "password"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the user",
+            "example": "user@mail.com"
+          }
+        },
+        "required": [
+          "lastname",
+          "firstname",
+          "age",
+          "password",
+          "email"
+        ]
+      },
+      "CreateRoleDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the roles of the given user in the given association",
+            "example": "President"
+          },
+          "idUser": {
+            "type": "number",
+            "description": "The id of the user",
+            "example": "1"
+          },
+          "idAssociation": {
+            "type": "number",
+            "description": "The id of the association",
+            "example": "1"
+          }
+        },
+        "required": [
+          "name",
+          "idUser",
+          "idAssociation"
+        ]
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "age": {
+            "type": "number"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "lastname",
+          "firstname",
+          "age",
+          "password"
+        ]
+      },
+      "Association": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "users"
+        ]
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "userId": {
+            "type": "number"
+          },
+          "associationId": {
+            "type": "number"
+          },
+          "association": {
+            "$ref": "#/components/schemas/Association"
+          }
+        },
+        "required": [
+          "name",
+          "user",
+          "userId",
+          "associationId",
+          "association"
+        ]
+      },
+      "UpdateRoleDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The new name of the roles of the given user in the given association",
+            "example": "President"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "AssociationDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The ID of the association",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the association",
+            "example": "Smith Family Association"
+          },
+          "members": {
+            "type": "array",
+            "description": "The members of the association",
+            "example": [
+              {
+                "lastname": "Smith",
+                "firstname": "John",
+                "age": 25,
+                "role": "President",
+                "id": 1
+              },
+              {
+                "lastname": "Doe",
+                "firstname": "Jane",
+                "age": 24,
+                "role": "Secretary",
+                "id": 2
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "members"
+        ]
+      },
+      "UpdateAssociation": {
+        "type": "object",
+        "properties": {
+          "idUsers": {
+            "description": "The users ids of the association",
+            "example": [
+              1,
+              2,
+              3
+            ],
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the association",
+            "example": "Association 1"
+          }
+        }
+      },
+      "AssociationMember": {
+        "type": "object",
+        "properties": {
+          "lastname": {
+            "type": "string",
+            "description": "The last name of the association member",
+            "example": "Smith"
+          },
+          "firstname": {
+            "type": "string",
+            "description": "The first name of the association member",
+            "example": "John"
+          },
+          "age": {
+            "type": "number",
+            "description": "The age of the association member",
+            "example": 25
+          },
+          "role": {
+            "type": "string",
+            "description": "The role of the association member",
+            "example": "President"
+          },
+          "id": {
+            "type": "number",
+            "description": "The ID of the association member",
+            "example": 1
+          }
+        },
+        "required": [
+          "lastname",
+          "firstname",
+          "age",
+          "role",
+          "id"
+        ]
+      },
+      "CreateAssociation": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the association",
+            "example": "Association 1"
+          },
+          "idUsers": {
+            "description": "The users ids of the association",
+            "example": [
+              1,
+              2,
+              3
+            ],
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "idUsers"
+        ]
+      },
+      "Minute": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "content": {
+            "type": "string"
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "association": {
+            "$ref": "#/components/schemas/Association"
+          },
+          "voters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "content",
+          "date",
+          "association",
+          "voters"
+        ]
+      },
+      "CreateMinuteDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The content of the minute, should relate the accepted motions",
+            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sagittis sem. Praesent sollicitudin lacus."
+          },
+          "idVoters": {
+            "description": "The ids of the voters. These should be the same than the users that are members of the association",
+            "example": [
+              1,
+              2,
+              3
+            ],
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "date": {
+            "type": "string",
+            "description": "The date when the general assembly occured",
+            "example": "12/12/2021"
+          },
+          "idAssociation": {
+            "type": "number",
+            "description": "The id of the association",
+            "example": "1"
+          }
+        },
+        "required": [
+          "content",
+          "idVoters",
+          "date",
+          "idAssociation"
+        ]
+      },
+      "UpdateMinuteDto": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The content of the minute, should relate the accepted motions",
+            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et sagittis sem. Praesent sollicitudin lacus."
+          },
+          "idVoters": {
+            "description": "The ids of the voters. These should be the same than the users that are members of the association",
+            "example": [
+              1,
+              2,
+              3
+            ],
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "date": {
+            "type": "string",
+            "description": "The date when the general assembly occured",
+            "example": "12/12/2021"
+          },
+          "idAssociation": {
+            "type": "number",
+            "description": "The id of the association",
+            "example": 1
+          }
+        }
+      },
+      "CreateEventDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the event",
+            "example": "Romain's birthday"
+          },
+          "start": {
+            "type": "string",
+            "description": "The start date of the event",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "end": {
+            "type": "string",
+            "description": "The end date of the event",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "association": {
+            "type": "number",
+            "description": "The association id of the event",
+            "example": 1
+          }
+        },
+        "required": [
+          "name",
+          "start",
+          "end",
+          "association"
+        ]
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The id of the event",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the event",
+            "example": "Birthday party"
+          },
+          "start": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The start of the event",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "end": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The end of the event",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "association": {
+            "description": "The association of the event",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Association"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "start",
+          "end",
+          "association"
+        ]
+      },
+      "UpdateEventDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the event",
+            "example": "Romain's birthday"
+          },
+          "start": {
+            "type": "string",
+            "description": "The start date of the event",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "end": {
+            "type": "string",
+            "description": "The end date of the event",
+            "example": "2021-01-01T00:00:00.000Z"
+          },
+          "association": {
+            "type": "number",
+            "description": "The association id of the event",
+            "example": 1
+          }
+        }
+      }
+    }
+  }
+}
